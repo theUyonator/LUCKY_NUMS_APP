@@ -12,11 +12,12 @@ async function processForm(evt) {
 
     resp = await axios.post(
                             "/api/get-lucky-num",
-                            JSON.stringify({
+                            {
                                 "name": name,
                                 "year": year, 
                                 "email": email, 
-                                "color":color}));
+                                "color":color
+                            });
     console.log(resp);
     handleResponse(resp);
     
@@ -27,18 +28,19 @@ async function processForm(evt) {
 function handleResponse(resp) {
 // First off we'd like to check for any errors available in the response and handle 
 // Them accordingly.
-    if(resp["errors"]){
+res = resp.data
+    if(res["errors"]){
     // Now we use a for in loop to handle these errors and display them in their 
     // appropraite spots
 
-    for(itm in resp["errors"]){
-        $(`#${itm}-err`).text(resp["errors"][itm]);
+    for(itm in res["errors"]){
+        $(`#${itm}-err`).text(res["errors"][itm]);
     }
     }
     else{
         $('#lucky-results').text(`
-                                 Your lucky number is ${resp.num.num} and a random fact about this number is (${resp.num.fact}).
-                                 Your birth year ${resp.year.year}, and your birth fact is (${resp.year.fact}).`)
+                                 Your lucky number is ${res.num.num} and a random fact about this number is (${res.num.fact}).
+                                 Your birth year ${res.year.year}, and your birth fact is (${res.year.fact}).`)
     }
 }
 
