@@ -38,6 +38,10 @@ res = resp.data
     }
     }
     else{
+        $('#name-err').empty();
+        $('#email-err').empty();
+        $('#year-err').empty();
+        $('#color-err').empty();
         $('#lucky-results').text(`
                                  Your lucky number is ${res.num.num} and a random fact about this number is (${res.num.fact}).
                                  Your birth year ${res.year.year}, and your birth fact is (${res.year.fact}).`)
